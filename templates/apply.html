@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMS Resources | Manpower Consultancy</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .apply-submit:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+        }
+
+        .apply-submit.loading {
+            opacity: .8;
+            pointer-events: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- COMMON NAV BAR INCLUSION -->
+    {% include 'includes/_navbar.html' %}
+
+    <!-- APPLICATION FORM SECTION -->
+    <section class="application-section">
+
+        <div class="app-container">
+
+            <!-- JOB INFO HEADER -->
+            <div class="job-applied-info" id="jobInfo">
+                <h3><strong>Post Applied For:</strong> <span id="jobTitle">{{ job.designation }}</span></h3>
+                <p>
+                    <span id="jobDetails">{{ job.specifications }}</span><br>
+                    <strong>Location:</strong> <span id="jobLocation">{{ job.location }}</span> |
+                    <strong>Experience:</strong> <span id="jobExperience">{{ job.experience }}</span> |
+                    <strong>Industry:</strong> <span id="jobIndustry">{{ job.industry }}</span>
+                </p>
+            </div>
+
+            <h2>Application Form</h2>
+            <p>Fill in your details and apply for overseas opportunities</p>
+
+            <form class="application-form" method="POST" action="{{ url_for('applications.submit_application',
+            mandate_id=job.mandate_id) }}" enctype="multipart/form-data">
+
+                <!-- BASIC DETAILS -->
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label>Full Name <span>*</span></label>
+                        <input type="text" placeholder="Full Name" id="name" name="full_name" required>
+                        <i class="fa fa-check"></i>
+                        <small class="error-msg">Name is required</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passport Number <span>*</span></label>
+                        <input type="text" placeholder="Passport Number" name="passport_no" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Date of Birth <span>*</span></label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Age</label>
+                        <input type="number" placeholder="Age" id="age" name="age" readonly>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Passport Type</label>
+                        <select name="passport_type" required>
+                            <option value="" disabled selected>Select Type</option>
+                            <option>ECNR</option>
+                            <option>ECR</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Contact Number <span>*</span></label>
+                        <input type="text" placeholder="Contact Number" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email ID</label>
+                        <input type="email" name="email" placeholder="Email ID">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Gender</label>
+                        <select name="gender">
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Others</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Marital Status</label>
+                        <select name="marital_status">
+                            <option value="" disabled selected>Select Status</option>
+                            <option>Married</option>
+                            <option>Single</option>
+                            <option>Divorced</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- ADDRESS -->
+                <div class="form-group">
+                    <label>Address <span>*</span></label>
+                    <textarea placeholder="Full Address" rows="3" name="address" required></textarea>
+                </div>
+
+                <!-- EXPERIENCE -->
+                <div class="form-group">
+                    <label style="margin-top:15px; margin-bottom:6px;">Work Experience</label>
+                </div>
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <input type="number" id="indiaExp" name="india_experience"
+                            placeholder="Experience in India (Years)">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="gulfExp" name="gulf_experience"
+                            placeholder="Experience in Gulf (Years)">
+                    </div>
+
+                    <div class="form-group">
+                        <input type="number" id="totalExp" name="total_experience"
+                            placeholder="Total Experience (Years)" readonly>
+                    </div>
+
+                </div>
+
+                <!-- EDUCATION -->
+                <div class="form-group">
+                    <label>Educational Qualification</label>
+                    <input type="text" name="qualification" placeholder="Education Qualification">
+                </div>
+
+                <!-- FILE UPLOAD -->
+                <div class="upload-grid">
+
+                    <div class="upload-box">
+                        <label>Upload CV <span>*</span></label>
+                        <input type="file" name="cv" required>
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Passport Copy (Front & Back)</label>
+                        <input type="file" name="passport_copy">
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Passport Size Photo <span>*</span></label>
+                        <input type="file" name="photo" required>
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Highest Education Certificate</label>
+                        <input type="file" name="education_certificate">
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Experience Certificate</label>
+                        <input type="file" name="experience_certificate">
+                    </div>
+
+                    <div class="upload-box">
+                        <label>Trade Test / Third Party Certificate</label>
+                        <input type="file" name="trade_certificate">
+                    </div>
+
+                </div>
+
+                <!-- SUBMIT -->
+                <button type="submit" id="submitBtn" class="apply-submit cursor-pointer" disabled>
+
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Submit Application</span>
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+     UNIVERSAL PUBLIC TOAST
+========================================================= -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+    <div id="publicToastContainer">
+
+        {% for category, message in messages %}
+
+        <div class="public-toast
+                {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+                    toast-success
+                {% elif category in ['error', 'danger'] %}
+                    toast-error
+                {% elif category == 'warning' %}
+                    toast-warning
+                {% elif category == 'info' %}
+                    toast-info
+                {% else %}
+                    toast-success
+                {% endif %}" data-toast>
+
+            <!-- Icon -->
+
+            <div class="toast-icon">
+
+                {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+
+                <i class="fas fa-check"></i>
+
+                {% elif category in ['error', 'danger'] %}
+
+                <i class="fas fa-times"></i>
+
+                {% elif category == 'warning' %}
+
+                <i class="fas fa-exclamation"></i>
+
+                {% else %}
+
+                <i class="fas fa-info"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Content -->
+
+            <div class="toast-content">
+
+                <div class="toast-title">
+
+                    {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+                    Success
+                    {% elif category in ['error', 'danger'] %}
+                    Error
+                    {% elif category == 'warning' %}
+                    Warning
+                    {% else %}
+                    Information
+                    {% endif %}
+
+                </div>
+
+                <div class="toast-message">
+                    {{ message }}
+                </div>
+
+            </div>
+
+
+            <!-- Close -->
+
+            <button type="button" class="toast-close" aria-label="Close notification">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+
+            <!-- Progress -->
+
+            <div class="toast-progress"></div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    {% endwith %}
+
+    <!-- COMMON FOOTER INCLUSION -->
+    {% include 'includes/_footer.html' %}
+
+    <script src="/static/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        /* ===============================
+           STAGGER SCROLL REVEAL
+        ================================ */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+
+            reveals.forEach(el => {
+
+                const revealTop = el.getBoundingClientRect().top;
+
+                if (revealTop < windowHeight - revealPoint) {
+
+                    const delay = el.getAttribute("data-delay") || 0;
+
+                    setTimeout(() => {
+                        el.classList.add("active");
+                    }, delay);
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* ===============================
+           NAV BAR SCROLLING
+        ================================ */
+
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+    </script>
+    <script id="xpcalc">
+        const indiaExp = document.querySelector('input[placeholder="Experience in India (Years)"]');
+        const gulfExp = document.querySelector('input[placeholder="Experience in Gulf (Years)"]');
+        const totalExp = document.querySelector('input[placeholder="Total Experience (Years)"]');
+
+        function calculateTotal() {
+            const india = parseFloat(indiaExp.value) || 0;
+            const gulf = parseFloat(gulfExp.value) || 0;
+            totalExp.value = (india + gulf).toFixed(1);
+        }
+
+        // Auto update on input
+        indiaExp.addEventListener("input", calculateTotal);
+        gulfExp.addEventListener("input", calculateTotal);
+
+        // Prevent manual edit
+        totalExp.setAttribute("readonly", true);
+    </script>
+    <script>
+        const dobInput = document.getElementById("dob");
+        const ageInput = document.getElementById("age");
+
+        dobInput.addEventListener("change", function () {
+            const dob = new Date(this.value);
+            const today = new Date();
+
+            let age = today.getFullYear() - dob.getFullYear();
+            const m = today.getMonth() - dob.getMonth();
+
+            if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                age--;
+            }
+
+            ageInput.value = age > 0 ? age : "";
+        });
+    </script>
+    <script>
+        function setError(input, message) {
+            const group = input.parentElement;
+            group.classList.add("error");
+            group.classList.remove("success");
+            group.querySelector(".error-msg").innerText = message;
+        }
+
+        function setSuccess(input) {
+            const group = input.parentElement;
+            group.classList.add("success");
+            group.classList.remove("error");
+        }
+
+        function validateInput(input, condition, message) {
+            if (condition) {
+                setError(input, message);
+            } else {
+                setSuccess(input);
+            }
+        }
+
+        /* FIELD VALIDATIONS */
+
+        const name = document.getElementById("name");
+        const phone = document.querySelector('input[placeholder="Contact Number"]');
+        const email = document.querySelector('input[type="email"]');
+
+        name.addEventListener("input", () => {
+            validateInput(name, name.value.trim() === "", "Name is required");
+        });
+
+        phone.addEventListener("input", () => {
+            validateInput(phone, phone.value.length < 10, "Enter valid number");
+        });
+
+        email.addEventListener("input", () => {
+            const pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            validateInput(email, !pattern.test(email.value), "Enter valid email");
+        });
+    </script>
+
+    <!-- MAIN VALIDATION FOR DISABLED SUBMIT -->
+    <script>
+        const submitBtn = document.getElementById("submitBtn");
+
+        function checkFormValidity() {
+
+            const requiredInputs = document.querySelectorAll(
+                ".application-form input[required], .application-form select[required], .application-form textarea[required]"
+            );
+
+            let allValid = true;
+
+            requiredInputs.forEach(input => {
+
+                if (input.type === "file") {
+                    if (input.files.length === 0) {
+                        allValid = false;
+                    }
+                }
+                else if (input.value.trim() === "") {
+                    allValid = false;
+                }
+
+                // also check validation class
+                const parent = input.parentElement;
+                if (parent.classList.contains("error")) {
+                    allValid = false;
+                }
+
+            });
+
+            submitBtn.disabled = !allValid;
+        }
+
+        /* RUN ON EVERY INPUT CHANGE */
+
+        document.querySelectorAll(".application-form input, .application-form select, .application-form textarea")
+            .forEach(el => {
+                el.addEventListener("input", checkFormValidity);
+                el.addEventListener("change", checkFormValidity);
+            });
+
+        const form = document.querySelector(".application-form");
+
+        form.addEventListener("submit", function () {
+
+            submitBtn.disabled = true;
+
+            submitBtn.classList.add("loading");
+
+            submitBtn.innerHTML = `
+        <i class="fa-solid fa-spinner fa-spin"></i>
+        Submitting Application...
+    `;
+
+        });
+    </script>
+</body>
+
+</html>

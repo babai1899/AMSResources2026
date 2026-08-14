@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMS Resources | Manpower Consultancy</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+
+    <!-- COMMON NAV BAR INCLUSION -->
+    {% include 'includes/_navbar.html' %}
+
+    <!-- CONTACT HERO -->
+    <section class="contact-hero">
+
+        <!-- PARTICLES -->
+        <div id="particles-js"></div>
+
+        <div class="contact-hero-content" data-aos="fade-up">
+
+            <h1>Let's Build <span>Global Opportunities</span></h1>
+
+            <p>
+                Connect with AMS Resources for trusted manpower recruitment,
+                overseas hiring solutions, and professional workforce support.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#contact-form" class="btn-primary">Send Message</a>
+                <a href="https://wa.me/919679872219" class="btn-outline">
+                    <i class="fa fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section reveal" data-aos="fade-up">
+
+        <div class="container contact-container">
+
+            <!-- LEFT : CONTACT INFO -->
+            <div class="contact-info" data-aos="fade-right">
+
+                <h2>Get in <span>Touch</span></h2>
+
+                <p>
+                    Looking for manpower solutions or overseas recruitment support?
+                    Our team is ready to assist you with professional guidance.
+                </p>
+
+                <!-- Changed layout to a single column list/cards via CSS -->
+                <section class="contact-cards-vertical">
+
+                    <div class="contact-card-v">
+                        <i class="fa fa-map-marker"></i>
+                        <div>
+                            <h3>Visit Us</h3>
+                            <p>AMS Resources<br> Nalini Apartment, 172/1, Bidhanpally,<br>Kolkata, West Bengal, 700084
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card-v">
+                        <i class="fa fa-envelope"></i>
+                        <div>
+                            <h3>Email Us</h3>
+                            <p>amsmanpower25@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card-v">
+                        <i class="fa fa-phone"></i>
+                        <div>
+                            <h3>Call Us</h3>
+                            <p>033 2410 0189</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-card-v">
+                        <i class="fa fa-clock-o"></i>
+                        <div>
+                            <h3>Business Hours</h3>
+                            <p>Mon-Fri: 10:00 AM - 6:00 PM<br>Sat: 10:00 AM - 2:00 PM</p>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+
+            <!-- RIGHT : CONTACT FORM -->
+            <div class="contact-form" data-aos="fade-left" id="contact-form">
+
+                <form action="{{ url_for('contact.submit_contact') }}" method="POST">
+
+                    <div class="form-group">
+                        <label>Full Name / Company Name <span class="required">*</span></label>
+                        <input type="text" name="full_name" placeholder="Enter your full name or company" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address <span class="required">*</span></label>
+                        <input type="email" name="email" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Subject</label>
+                        <input type="text" name="subject" placeholder="What is this regarding?">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Message <span class="required">*</span></label>
+
+                        <textarea name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+                    </div>
+
+                    <button type="submit" class="contact-submit-btn">
+                        Send Message
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- MAP -->
+        <div class="contact-map reveal" data-aos="fade-up">
+
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3038.8589382780415!2d88.36997287428373!3d22.46825703678845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a027100791f16f1%3A0xd97b0d62df5cda80!2sAMS%20Resources!5e1!3m2!1sen!2sin!4v1779947839191!5m2!1sen!2sin"
+                width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+        </div>
+
+        <div class="contact-widget">
+
+            <div class="contact-options" id="contactOptions">
+
+                <a href="https://wa.me/919679872219" class="contact-btn whatsapp" target="_blank">
+                    <i class="fa fa-whatsapp"></i>
+                </a>
+
+                <a href="tel:+913324100189" class="contact-btn call">
+                    <i class="fa fa-phone"></i>
+                </a>
+
+                <a href="mailto:amsmanpower25@gmail.com" class="contact-btn email">
+                    <i class="fa fa-envelope"></i>
+                </a>
+
+            </div>
+
+            <div class="contact-main" onclick="toggleContact()">
+                <i class="fa fa-comments"></i>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- =========================================================
+     UNIVERSAL PUBLIC TOAST
+========================================================= -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+
+    <div id="publicToastContainer">
+
+        {% for category, message in messages %}
+
+        <div class="public-toast
+                {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+                    toast-success
+                {% elif category in ['error', 'danger'] %}
+                    toast-error
+                {% elif category == 'warning' %}
+                    toast-warning
+                {% elif category == 'info' %}
+                    toast-info
+                {% else %}
+                    toast-success
+                {% endif %}" data-toast>
+
+            <!-- Icon -->
+
+            <div class="toast-icon">
+
+                {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+
+                <i class="fas fa-check"></i>
+
+                {% elif category in ['error', 'danger'] %}
+
+                <i class="fas fa-times"></i>
+
+                {% elif category == 'warning' %}
+
+                <i class="fas fa-exclamation"></i>
+
+                {% else %}
+
+                <i class="fas fa-info"></i>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- Content -->
+
+            <div class="toast-content">
+
+                <div class="toast-title">
+
+                    {% if category in ['success', 'cv_success', 'application_success', 'contact_success'] %}
+                    Success
+                    {% elif category in ['error', 'danger'] %}
+                    Error
+                    {% elif category == 'warning' %}
+                    Warning
+                    {% else %}
+                    Information
+                    {% endif %}
+
+                </div>
+
+                <div class="toast-message">
+                    {{ message }}
+                </div>
+
+            </div>
+
+
+            <!-- Close -->
+
+            <button type="button" class="toast-close" aria-label="Close notification">
+
+                <i class="fas fa-times"></i>
+
+            </button>
+
+
+            <!-- Progress -->
+
+            <div class="toast-progress"></div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+    {% endwith %}
+
+    <!-- COMMON FOOTER INCLUSION -->
+    {% include 'includes/_footer.html' %}
+
+    <script src="/static/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        /* ===============================
+           STAGGER SCROLL REVEAL
+        ================================ */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+
+            reveals.forEach(el => {
+
+                const revealTop = el.getBoundingClientRect().top;
+
+                if (revealTop < windowHeight - revealPoint) {
+
+                    const delay = el.getAttribute("data-delay") || 0;
+
+                    setTimeout(() => {
+                        el.classList.add("active");
+                    }, delay);
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* ===============================
+           NAV BAR SCROLLING
+        ================================ */
+
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+    <script>
+        particlesJS("particles-js", {
+
+            "particles": {
+
+                "number": { "value": 60 },
+
+                "size": { "value": 3 },
+
+                "move": { "speed": 1.5 },
+
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#22c55e",
+                    "opacity": 0.3,
+                    "width": 1
+                }
+
+            }
+
+        });
+    </script>
+    <script>
+        function toggleContact() {
+            document.getElementById("contactOptions").classList.toggle("active");
+        }
+    </script>
+</body>
+
+</html>

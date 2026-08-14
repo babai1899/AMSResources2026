@@ -1,0 +1,65 @@
+<!-- 3. ACTIVE DATABASES -->
+<section class="page min-h-screen flex flex-col hidden view-section" id="activeJobsPage">
+    <div
+        class="p-6 sm:px-8 bg-white border-b border-slate-200/80 sticky top-0 z-30 shadow-sm flex items-center justify-between">
+        <div>
+            <h2 class="text-lg font-bold text-slate-900">Active Job Postings</h2>
+            <p class="text-xs text-slate-500 mt-0.5">Manage, configure states, and audit live structural
+                listings</p>
+        </div>
+        <!-- SEARCH BAR -->
+        <div class="relative hidden sm:block">
+            <i class="fas fa-search absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+            <input id="jobSearch" type="text" placeholder="Global search..."
+                class="pl-8 pr-4 py-1.5 bg-slate-50 border border-slate-200 text-xs rounded-lg w-64 focus:outline-none focus:bg-white focus:border-blue-500 transition shadow-inner">
+        </div>
+    </div>
+
+    <div class="flex-1 p-6 sm:p-8 max-w-[1600px] w-full mx-auto">
+        <div class="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
+            <table id="activeJobsTable" class="w-full text-left border-collapse whitespace-nowrap">
+                <thead>
+                    <tr
+                        class="bg-slate-50 border-b border-slate-200 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                        <th class="py-3 px-5">Listing ID</th>
+                        <th class="py-3 px-5">Enterprise Entity</th>
+                        <th class="py-3 px-5">Designation Target</th>
+                        <th class="py-3 px-5">Date Dispatched</th>
+                        <th class="py-3 px-5 text-center">Status</th>
+                        <th class="py-3 px-5 text-center">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-xs font-medium text-slate-700">
+                    {% for job in jobs %}
+                    <tr>
+                        <td class="py-3.5 px-5 font-mono text-slate-400">{{ job.mandate_id }}</td>
+                        <td class="py-3.5 px-5 text-slate-900 font-bold">{{ job.employer }}</td>
+                        <td class="py-3.5 px-5"><span
+                                class="px-2 py-0.5 bg-blue-50 text-blue-700 rounded text-[10px] font-bold border border-blue-100">{{
+                                job.designation }}</span></td>
+                        <td class="py-3.5 px-5 text-slate-500">{{ job.created_at.strftime("%d-%m-%Y") }}
+                        </td>
+                        <td class="py-3.5 px-5 text-center">
+                            <button onclick="toggleJobStatus(this, '{{ job.id }}')" class="{% if job.status=='Active' %}
+                                bg-emerald-50 text-emerald-700 border border-emerald-100
+                                {% else %}
+                                bg-amber-50 text-amber-700 border border-amber-100
+                                {% endif %}                                       
+                                text-[10px] font-bold px-2 py-0.5 rounded
+                                cursor-pointer hover:opacity-80">
+                                {{ job.status }}
+                            </button>
+                        </td>
+                        <td class="py-3.5 px-5 text-center">
+                            <button onclick="deleteJob('{{ job.id }}')"
+                                class="px-2 py-1 text-rose-600 bg-rose-50 border border-rose-100 rounded hover:bg-rose-100 transition cursor-pointer">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

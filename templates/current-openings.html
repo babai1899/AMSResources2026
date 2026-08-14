@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMS Resources | Manpower Consultancy</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    
+    <!-- COMMON NAV BAR INCLUSION -->
+    {% include 'includes/_navbar.html' %}
+
+    <!-- CURRENT OPENINGS -->
+    <section class="jobs-section reveal" data-aos="fade-up">
+
+        <div class="container">
+
+            <div class="section-header">
+                <h2>Current <span>Openings</span></h2>
+                <p>Explore opportunities across industries and apply instantly.</p>
+            </div>
+
+            <div class="table-wrapper">
+
+                <table class="jobs-table" id="jobsTable">
+
+                    <thead>
+                        <tr>
+                            <th>ID No</th>
+                            <th>Company</th>
+                            <th>Job Title</th>
+                            <th>Industry</th>
+                            <th>Experience</th>
+                            <th>Location</th>
+                            <th>Apply</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for job in jobs %}
+                        <tr>
+                            <td>{{ job.mandate_id }}</td>
+                            <td>{{ job.employer }}</td>
+                            <td>{{ job.designation }}</td>
+                            <td>{{ job.industry }}</td>
+                            <td>{{ job.experience }}</td>
+                            <td>{{ job.location }}</td>
+                            <td><a href="{{ url_for('applications.apply', mandate_id=job.mandate_id) }}"
+                                class="apply-btn">
+                                 Apply Now
+                             </a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="pagination">
+                <button class="page-btn" onclick="prevPage()">Prev</button>
+                <span id="pageInfo"></span>
+                <button class="page-btn" onclick="nextPage()">Next</button>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FUTURE OPENINGS CTA -->
+    <section class="upload-cv-section reveal" data-aos="fade-up">
+
+        <div class="future-cta">
+            <p>Don't see the right role?</p>
+            <a href="/fill-biodata">
+                Submit your CV for future openings →
+            </a>
+        </div>
+
+    </section>
+
+    <!-- COMMON FOOTER INCLUSION -->
+    {% include 'includes/_footer.html' %}
+
+    <script src="/static/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        /* ===============================
+           STAGGER SCROLL REVEAL
+        ================================ */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+
+            reveals.forEach(el => {
+
+                const revealTop = el.getBoundingClientRect().top;
+
+                if (revealTop < windowHeight - revealPoint) {
+
+                    const delay = el.getAttribute("data-delay") || 0;
+
+                    setTimeout(() => {
+                        el.classList.add("active");
+                    }, delay);
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* ===============================
+           NAV BAR SCROLLING
+        ================================ */
+
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

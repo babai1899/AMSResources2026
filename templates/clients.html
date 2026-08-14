@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMS Resources | Manpower Consultancy</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    
+    <!-- COMMON NAV BAR INCLUSION -->
+    {% include 'includes/_navbar.html' %}
+
+    <!-- CLIENTS SECTION -->
+    <section class="clients-section reveal" data-aos="fade-up" id="clients">
+
+        <div class="container">
+
+            <div class="section-header">
+                <h2>Our <span>Clients</span></h2>
+                <p>Trusted by leading companies across industries.</p>
+            </div>
+
+            <div class="clients-grid">
+
+                {% for client in clients %}
+                <div class="client-card">
+
+                    <div class="client-logo">
+                        <img src="{{ url_for('static', filename='clients/' + client.logo_file) }}"
+                            alt="{{ client.client_name }}">
+                    </div>
+
+                    <div class="client-overlay">
+                        <h4>{{ client.client_name }}</h4>
+                        <span><i class="fa-solid fa-location-dot"></i> {{ client.country }}</span>
+                    </div>
+
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- COMMON FOOTER INCLUSION -->
+    {% include 'includes/_footer.html' %}
+
+    <script src="/static/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        /* ===============================
+           STAGGER SCROLL REVEAL
+        ================================ */
+
+        const reveals = document.querySelectorAll(".reveal");
+
+        function revealOnScroll() {
+
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+
+            reveals.forEach(el => {
+
+                const revealTop = el.getBoundingClientRect().top;
+
+                if (revealTop < windowHeight - revealPoint) {
+
+                    const delay = el.getAttribute("data-delay") || 0;
+
+                    setTimeout(() => {
+                        el.classList.add("active");
+                    }, delay);
+
+                }
+
+            });
+
+        }
+
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* ===============================
+           NAV BAR SCROLLING
+        ================================ */
+
+        const navbar = document.querySelector(".navbar");
+
+        window.addEventListener("scroll", () => {
+
+            if (window.scrollY > 40) {
+                navbar.classList.add("scrolled");
+            } else {
+                navbar.classList.remove("scrolled");
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

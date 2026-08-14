@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AMS Resources | Manpower Consultancy</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+
+<body>
+    
+    <!-- COMMON NAV BAR INCLUSION -->
+    {% include 'includes/_navbar.html' %}
+
+    <!-- HERO -->
+    <section class="about-hero reveal">
+
+        <video class="about-hero-video" autoplay muted loop playsinline>
+            <source src="{{ url_for('static', filename='assets/Global_Workforce_Opportunities_Corporate_Video.mp4') }}" type="video/mp4">
+        </video>
+
+        <div class="about-hero-content" data-aos="fade-up">
+
+            <h1>About <span>AMS Resources</span></h1>
+
+            <p>
+                Delivering trusted manpower solutions across India and overseas
+                industries with professionalism, reliability, and commitment.
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- COMPANY INTRO -->
+    <section class="about-company section reveal">
+        <div class="container">
+            <h2 data-aos="fade-up">Who We Are</h2>
+
+            <p data-aos="fade-up">
+
+            AMS Resources is a leading manpower consultancy specializing in recruitment
+            solutions for industrial, engineering, and corporate sectors.
+
+            With years of experience in talent acquisition and workforce management,
+            we connect skilled professionals with trusted organizations across India
+            and international markets.
+
+            Our goal is to support businesses by providing qualified manpower while
+            creating career opportunities for talented individuals.
+
+            </p>
+        </div>
+    </section>
+
+    <!-- DIRECTOR MESSAGE -->
+    <section class="director-section section">
+        <div class="container director-grid">
+            <div class="director-image" data-aos="fade-right">
+                <img src="{{ url_for('static', filename='assets/Tamilmathan.jpeg')}}" alt="Director">
+            </div>
+
+            <div class="director-message" data-aos="fade-left">
+                <h2>Message from the Director</h2>
+                <p>
+
+                At AMS Resources, our mission has always been to bridge the gap between
+                talent and opportunity.
+
+                We believe that every organization deserves access to the best workforce,
+                and every professional deserves the right career platform.
+
+                Through dedication, transparency, and industry expertise, our team works
+                tirelessly to deliver recruitment solutions that help businesses grow
+                and individuals succeed.
+
+                </p>
+
+                <h4>— Mr. Tamilmathan, <span>Director/Proprietor</span></h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- BDM MESSAGE -->
+    <section class="director-section section">
+        <div class="container director-grid">
+
+            <div class="director-message" data-aos="fade-right">
+                <h2>Message from the BDM</h2>
+                <p>
+
+                    At AMS Resources, our mission is to build the relationships that build businesses. We believe that
+                    true business development isn't just about transactions; it’s about aligning strategic goals with
+                    elite talent. By fostering trust, understanding market dynamics, and delivering bespoke recruitment
+                    solutions, we help our partners conquer new heights.
+
+                </p>
+
+                <h4>— Mr. Surajit Paul, <span>Business Development Manager</span></h4>
+            </div>
+
+            <div class="director-image" data-aos="fade-left">
+                <img src="{{ url_for('static', filename='assets/surajit_paul.jpg')}}" alt="BDM">
+            </div>
+        </div>
+    </section>
+
+    <!-- COUNTER -->
+    <section class="stats-section">
+
+        <div class="container stats-grid">
+    
+            <div class="stat-card">
+                <h2 class="counter" data-target="10">0</h2>
+                <p>Years Experience</p>
+            </div>
+    
+            <div class="stat-card">
+                <h2 class="counter" data-target="500">0</h2>
+                <p>Successful Placements</p>
+            </div>
+    
+            <div class="stat-card">
+                <h2 class="counter" data-target="100">0</h2>
+                <p>Global Clients</p>
+            </div>
+    
+            <div class="stat-card">
+                <h2 class="counter" data-target="20">0</h2>
+                <p>Industry Sectors</p>
+            </div>
+    
+        </div>
+    
+    </section>
+
+    <!-- MISSION & VISION -->
+    <section class="mission-vision section">
+
+        <div class="container mission-grid">
+
+            <div class="mission-card" data-aos="fade-up">
+
+                <h3>Our Mission</h3>
+
+                <p>
+
+                To provide reliable, efficient, and ethical recruitment services by
+                connecting skilled professionals with organizations that value talent
+                and excellence.
+
+                </p>
+            </div>
+
+            <div class="mission-card" data-aos="fade-up" data-aos-delay="150">
+                <h3>Our Vision</h3>
+                <p>
+
+                To become one of the most trusted manpower consultancy firms in India
+                and internationally, known for quality hiring, integrity, and long-term
+                client partnerships.
+
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GLOBAL RECRUITMENT MAP -->
+    <section class="global-map-section reveal">
+
+        <div class="container">
+    
+            <div class="section-header">
+                <h2>Global Recruitment Network</h2>
+                <p>
+                    AMS Resources connects skilled professionals with opportunities 
+                    across multiple international destinations.
+                </p>
+            </div>
+    
+            <div class="map-wrapper">
+    
+                <img src="/static/assets/World-Map.png" class="world-map">
+    
+            </div>
+    
+        </div>
+    
+    </section>
+
+    <!-- CORE VALUES -->
+    <section class="values-section section">
+        <div class="container">
+
+            <h2 data-aos="fade-up">Our Core Values</h2>
+
+            <div class="values-grid">
+
+                <div class="value-card" data-aos="fade-up">
+                    <h4>Integrity</h4>
+                    <p>We operate with honesty, transparency, and professionalism.</p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="100">
+                    <h4>Commitment</h4>
+                    <p>We are dedicated to delivering the best recruitment solutions.</p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="200">
+                    <h4>Excellence</h4>
+                    <p>We strive for quality in every hiring process.</p>
+                </div>
+
+                <div class="value-card" data-aos="fade-up" data-aos-delay="300">
+                    <h4>Partnership</h4>
+                    <p>We build long-term relationships with clients and candidates.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+
+        <div class="container" data-aos="fade-up">
+
+            <h2>Looking for Skilled Manpower?</h2>
+
+            <p>Partner with AMS Resources for reliable recruitment solutions.</p>
+
+            <a href="/contact" class="btn-primary">Contact Us</a>
+
+        </div>
+
+    </section>
+
+    <!-- COMMON FOOTER INCLUSION -->
+    {% include 'includes/_footer.html' %}
+
+    <script src="/static/js/script.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration:1000,
+            once:true
+        });
+
+        /* ===============================
+           STAGGER SCROLL REVEAL
+        ================================ */
+        
+        const reveals = document.querySelectorAll(".reveal");
+        
+        function revealOnScroll(){
+        
+            const windowHeight = window.innerHeight;
+            const revealPoint = 120;
+        
+            reveals.forEach(el => {
+        
+                const revealTop = el.getBoundingClientRect().top;
+        
+                if(revealTop < windowHeight - revealPoint){
+        
+                    const delay = el.getAttribute("data-delay") || 0;
+        
+                    setTimeout(()=>{
+                        el.classList.add("active");
+                    }, delay);
+        
+                }
+        
+            });
+        
+        }
+        
+        window.addEventListener("scroll", revealOnScroll);
+        revealOnScroll();
+
+        /* ===============================
+           NAV BAR SCROLLING
+        ================================ */
+
+        const navbar = document.querySelector(".navbar");
+        
+        window.addEventListener("scroll", () => {
+        
+            if(window.scrollY > 40){
+                navbar.classList.add("scrolled");
+            }else{
+                navbar.classList.remove("scrolled");
+            }
+        
+        });
+        
+    </script>
+</body>
+</html>
